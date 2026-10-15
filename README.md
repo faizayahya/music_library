@@ -1,43 +1,41 @@
-# {{PROBLEM}} Class Design Recipe
-
-Copy this into a `recipe.md` in your project and fill it out.
+# {{PROBLEM}} Class Music Library Design Recipe
 
 ## 1. Describe the Problem
 
-_Put or write the user story here. Add any clarifying notes you might have._
+As a user
+So that I can keep track of my music listening
+I want to add tracks I've listened to and see a list of them.
+
 
 ## 2. Design the Class Interface
 
 _Include the initializer, public properties, and public methods with all parameters, return values, and side-effects._
+Properties: tracks, list of strings
 
 ```python
 # EXAMPLE
 
-class Reminder:
-    # User-facing properties:
+class MusicLibrary:
+    # User-facing properties: tracks, list of strings 
     #   name: string
 
-    def __init__(self, name):
-        # Parameters:
-        #   name: string
+    def __init__(self):
+        # Parameters: none 
         # Side effects:
-        #   Sets the name property of the self object
+        #   Sets self.tracks as an empty list
         pass # No code here yet
 
-    def remind_me_to(self, task):
+    def add(self, track):
         # Parameters:
-        #   task: string representing a single task
-        # Returns:
-        #   Nothing
-        # Side-effects
-        #   Saves the task to the self object
+        # track: string represnting a single track e.g happy by pharell 
+        # Returns: Nothing
+        # Side-effects: Add a track to self.track
         pass # No code here yet
 
-    def remind(self):
-        # Returns:
-        #   A string reminding the user to do the task
-        # Side-effects:
-        #   Throws an exception if no task is set
+    def list_track(self):
+        #Parameters: nothing
+        # Returns: A list of tracks (string)
+        # Side-effects: No
         pass # No code here yet
 ```
 
@@ -49,27 +47,41 @@ _Make a list of examples of how the class will behave in different situations._
 # EXAMPLE
 
 """
-Given a name and a task
-#remind reminds the user to do the task
+Starts with an empty track list
 """
-reminder = Reminder("Kay")
-reminder.remind_me_to("Walk the dog")
-reminder.remind() # => "Walk the dog, Kay!"
+library = MusicLibrary()
+library.list_tracks() ==> []
 
 """
-Given a name and no task
-#remind raises an exception
+Add track
 """
-reminder = Reminder("Kay")
-reminder.remind() # raises an error with the message "No task set."
+library = MusicLibrary()
+library.add("Superbase")
+library.list_track() ==> "Superbase"
 
 """
-Given a name and an empty task
-#remind still reminds the user to do the task, even though it looks odd
+Add multiple tracks, and return in order
 """
-reminder = Reminder("Kay")
-reminder.remind_me_to("")
-reminder.remind() # => ", Kay!"
+library = MusicLibrary()
+library.add("Superbase")
+library.add("No Scrubs")
+library.add("Thriller")
+library.list_track() ==> ["Superbase", "No Scrubs", "Thriller]
+
+"""
+
+"""
+Raises an error if there is nothing in the empty list
+"""
+library.add(" ")
+raises error "Library can't be empty"
+
+"""
+Raises an error if it isn't a string
+"""
+library.add(321)
+raises error "Track must be string"
+
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
