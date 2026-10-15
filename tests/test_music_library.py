@@ -9,6 +9,13 @@ def test_error_empty_track():
     assert str(err.value) == "Track cannot be empty"
 
 
+def test_error_if_not_string():
+    library = MusicLibrary()
+    with pytest.raises(Exception) as err:
+            library.add_tracks(int)
+    assert str(err.value) == "Track must be string"
+
+
 def test_starts_empty_list():
     library = MusicLibrary()
     assert library.list_tracks() == []
